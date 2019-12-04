@@ -1,0 +1,27 @@
+{
+     "name": "dashboard_line_graph",
+     "version": "1.0.0",
+     "description": "dashboard with line graph",
+     "dependencies": {
+          "express": "^4.17.1"
+     },
+     "engine": {
+          "node": "10.3.0",
+          "npm": "6.10.3"
+     },
+     "scripts": {
+          "start": "node server.js"
+     },
+     "main": "server.js",
+     "repository": {
+          "type": "git",
+          "url": ""
+     },
+     "author": "pnk0011",
+     "license": "pnk0011",
+     "bugs": {
+          "url": ""
+     },
+     "homepage": "/",
+     "devDependencies": {}
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="images/na.png">
+
+  <style>
+    [ng-cloak] {
+      display: none;
+    }
+
+
+  </style>
+  <title>OMDB-API</title>
+</head>
+
+<body ng-controller="MovieController">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><b> OMDB-API </b> <span> Movies & TV shows</span></a>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid contain-pad" ng-cloak>
+    <div class="row row-top animated bounceInDown">
+      <form name="omdbSearch" novalidate>
+        <div class="col-md-2 col-xs-2">
+          <select class="form-control" required ng-model="searchBy" name="searchBy" style="border-radius: 6px;"
+            ng-class="{'isInvaliid' : omdbSearch.searchBy.$invalid && submitted == true }">
+            <option value="" selected>Search By</option>
+            <option value="Title">Title</option>
+            <option value="ID">ID</option>
+
+          </select>
+
+        </div>
+
+        <div class="col-md-3 col-xs-4">
+          <input type="text" ng-model="search" for="validationDefault22" name="searchInput" class="form-control "
+            placeholder="Movie or TV Series"
+            ng-class="{'isInvaliid' : omdbSearch.searchInput.$invalid && submitted == true }" required autofocus>
+        </div>
+        <div class="col-md-1 col-xs-2">
+
+          <input type="text" minlength="4" maxlength="4" ng-model="Year" class="form-control" placeholder="Year"
+            style="border-radius: 6px;">
+
+        </div>
+        <div class="col-md-2 col-xs-2">
+          <select class="form-control" ng-model="Type" style="border-radius: 6px;">
+            <option value="" selected>Type </option>
+            <option value="movie">Movie</option>
+            <option value="series">Series</option>
+            <option value="episode">Epsiode</option>
+
+          </select>
+        </div>
+        <div class="col-md-1 col-xs-2">
+          <button type="button" ng-click="fetchDetails()" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="row-top">
+      <div class="loading-container" ng-show="putLoader">
+        <div class="loading"></div>
+        <div id="loading-text">loading</div>
+      </div>
+      <div class="col-md-12 index" style="padding-left: 0px;">
+        <div class="animated tada text-center" ng-if="details.Response === 'False'">
+          <h2>No Results Found</h2>
+        </div>
+        <div class="animated bounceInDown" ng-if="details.Response === 'True'">
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-4" ng-repeat="poster in posters">
+        <img id="myImg" ng-click="getMovieData(poster.imdbID)" ng-src="{{ poster.Poster }}"
+          style="height: 350px;width: 500px;" class="img-responsive thumbnail animated" />
+      </div>
+    </div>
+    <div id="myModal" class="modal" tabindex="-1" style="position: fixed;">
+      <span type="button" class="close" data-dismiss="modal">&times;</span>
+      <div class="row">
+        <div class="col-md-5">
+          <img class="modal-content" id="img01">
+        </div>
+        <div class="col-md-7">
+          <h4><b>Title : {{modalTitle}}</b> </h4>
+          <h4><b>Year : {{modalYear}}</b> </h4>
+          <div class="row"> <span ng-repeat="rating in ratings">
+              Average Rating
+              <div star-rating rating-value="rating.current" max="rating.max"></div>
+            </span>
+          </div>
+          <div class="row"> <span ng-repeat="rating in ratingsDynamic">
+              Your Rating
+              <div star-rating-dynamic rating-value="rating.current" max="rating.max"></div>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h4><b>Description :</b></h4>
+        <p> {{modalPlot}} </p>
+      </div>
+    </div>
+    <script src="js/angular.min.js"></script>
+    <script src="js/ui-bootstrap-custom-tpls-0.14.3.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/imdbService.js"></script>
+  </div>
+</body>
+
+</html>
