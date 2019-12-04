@@ -1,7 +1,7 @@
 {
-     "name": "dashboard_line_graph",
+     "name": "omdb-api-angularjs",
      "version": "1.0.0",
-     "description": "dashboard with line graph",
+     "description": "omdb-api-angularjs",
      "dependencies": {
           "express": "^4.17.1"
      },
